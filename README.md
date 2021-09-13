@@ -109,10 +109,19 @@ Mon Sep 13 02:09:05 2021
 $ sudo docker pull nvidia/cuda:11.4.1-cudnn8-devel-ubuntu20.04
 ```
 
+```
+$ xhost +
+$ sudo docker run -itd -v /tmp/test:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY --gpus all --rm --name="camera" nvidia/cuda:11.4.1-cudnn8-devel-ubuntu20.04
+$ sudo docker exec -it camera /bin/bash
+
+
 
 echo "deb http://dk.archive.ubuntu.com/ubuntu/ bionic main universe" >> /etc/apt/sources.list
 apt-get update
 apt-get install -y gcc-6 g++-6
 apt-get install -y libx11-dev
+
+
+```
 
 
