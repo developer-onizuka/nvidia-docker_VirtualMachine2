@@ -35,7 +35,7 @@ $ sudo update-grub
 $ shutdown -h now
 ```
 
-# 1. Install Docker on Virtual Machine and changing directory to store images because it is too large.
+# 1. Install Docker on Virtual Machine
 ```
 $ sudo apt-get update
 $ sudo apt-get install -y docker.io
