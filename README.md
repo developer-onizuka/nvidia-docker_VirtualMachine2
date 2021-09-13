@@ -104,4 +104,15 @@ Mon Sep 13 02:09:05 2021
 +-----------------------------------------------------------------------------+
 ```
 
+# 5. Pull CUDA and cuDNN container
+```
+$ sudo docker pull nvidia/cuda:11.4.1-cudnn8-devel-ubuntu20.04
+```
+
+
+echo "deb http://dk.archive.ubuntu.com/ubuntu/ bionic main universe" >> /etc/apt/sources.list
+apt-get update
+apt-get install -y gcc-6 g++-6
+apt-get install -y libx11-dev
+
 
