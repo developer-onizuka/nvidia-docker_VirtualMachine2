@@ -60,7 +60,7 @@ $ sudo tee /etc/modules-load.d/ipmi.conf <<< "ipmi_msghandler"   && sudo tee /et
 $ sudo update-initramfs -u
 $ sudo reboot
 $ sudo docker pull nvcr.io/nvidia/driver:470.57.02-ubuntu20.04
-$ sudo docker run --name nvidia-driver -d --privileged --pid=host -v /run/nvidia:/run/nvidia:shared -v /var/log:/var/log --restart=unless-stopped nvcr.io/nvidia/driver:470.57.02-ubuntu20.04
+$ sudo docker run --name nvidia-driver -itd --rm --privileged --pid=host -v /run/nvidia:/run/nvidia:shared -v /var/log:/var/log  nvcr.io/nvidia/driver:470.57.02-ubuntu20.04
 $ sudo docker logs -f nvidia-driver
 ...
 Mounting NVIDIA driver rootfs...
