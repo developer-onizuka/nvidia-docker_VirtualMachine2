@@ -109,35 +109,50 @@ Mon Sep 13 02:09:05 2021
 $ sudo docker pull nvidia/cuda:11.4.1-cudnn8-devel-ubuntu20.04
 ```
 
+# 6. Install Libraries into the nvidia/cuda:11.4.1-cudnn8-devel-ubuntu20.04 downloaded
 ```
 $ xhost +
 $ sudo docker run -itd -v /tmp/test:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY --gpus all --rm --name="camera" nvidia/cuda:11.4.1-cudnn8-devel-ubuntu20.04
 $ sudo docker exec -it camera /bin/bash
+```
+```
+# echo "deb http://dk.archive.ubuntu.com/ubuntu/ bionic main universe" >> /etc/apt/sources.list
+# apt-get update
+# apt-get install -y gcc-6 g++-6
+# apt-get install -y libx11-dev
 
+# apt-get install -y python3-distutils python3-setuptools python3-pip
+# DEBIAN_FRONTEND='noninteractive' apt-get install -y cmake libopenblas-dev liblapack-dev libjpeg-dev
+# apt-get install -y git
+# git clone https://github.com/davisking/dlib.git
+# cd dlib
+# mkdir build
+# cd build
+# cmake .. -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1 -DCUDA_HOST_COMPILER=/usr/bin/gcc-6
+# cmake --build .
+# cd .. 
 
-
-echo "deb http://dk.archive.ubuntu.com/ubuntu/ bionic main universe" >> /etc/apt/sources.list
-apt-get update
-apt-get install -y gcc-6 g++-6
-apt-get install -y libx11-dev
-
-apt-get install -y python3-distutils python3-setuptools python3-pip
-DEBIAN_FRONTEND='noninteractive' apt-get install -y cmake libopenblas-dev liblapack-dev libjpeg-dev
-apt-get install -y git
-git clone https://github.com/davisking/dlib.git
-cd dlib
-mkdir build
-cd build
-cmake .. -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1 -DCUDA_HOST_COMPILER=/usr/bin/gcc-6
-cmake --build .
-cd .. 
-
-apt-get install -y python3-opencv
-pip3 install face_recognition
-cd /mnt
-cp -p test.py /tmp
-cp -p train.pkl /tmp
-/tmp/test.py 
+# apt-get install -y python3-opencv
+# pip3 install face_recognition
+# cd /mnt
+# cp -p test.py /tmp
+# cp -p train.pkl /tmp
+# /tmp/test.py 
 ```
 
+# 7. Create the face_recognizer by using Dcokerfile on Virtual Machine
+If you can run the test above, you might use the Dockerfile attached.
+```
+$ mkdir face_recognizer
+$ cd face_recognizer
+$ ls
+Dockerfile
+test.py
+train.pkl
+$ sudo docker build -t face_recognizer .
 
+$ sudo docker images
+REPOSITORY              TAG                               IMAGE ID       CREATED       SIZE
+nvcr.io/nvidia/driver   470.57.02-ubuntu20.04             15eeb055da6a   5 weeks ago   826MB
+nvidia/cuda             11.4.1-cudnn8-devel-ubuntu20.04   132256fd7024   5 weeks ago   8.83GB
+```
