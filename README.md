@@ -18,6 +18,23 @@ $ uname -r
 5.4.0-42-generic
 ```
 
+You might use for installing 5.4.0-42 in your machine.
+```
+$ sudo visudo
+$ sudo vi /etc/apt/apt.conf.d/20auto-upgrades 
+$ sudo apt-get install linux-image-5.4.0-42-generic linux-headers-5.4.0-42-generic linux-modules-extra-5.4.0-42-generic
+$ sudo vi /etc/default/grub
+$ sudo update-grub
+$ reboot
+$ dpkg --get-selections |grep linux-
+$ sudo apt-get autoremove --purge linux-{headers,image,modules}-5.11.0-34
+$ dpkg --get-selections |grep linux-
+$ sudo apt-get autoremove --purge linux-{headers,image,modules}-5.8.0-43
+$ sudo vi /etc/default/grub
+$ sudo update-grub
+$ shutdown -h now
+```
+
 # 1. Install Docker on Virtual Machine and changing directory to store images because it is too large.
 ```
 $ sudo apt-get update
