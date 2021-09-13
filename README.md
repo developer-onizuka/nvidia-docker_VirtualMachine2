@@ -7,8 +7,8 @@ OptiPlex-5050:~$ dpkg -l |grep -i nvidia
 OptiPlex-5050:~$ (no result)
 ```
 ```
-VirtualMachine:~$ dpkg -l |grep -i nvidia
-VirtualMachine:~$ (no result)
+Guest-Machine:~$ dpkg -l |grep -i nvidia
+Guest-Machine:~$ (no result)
 ```
 
 # 0. Check Kernel version
