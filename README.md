@@ -121,6 +121,16 @@ apt-get update
 apt-get install -y gcc-6 g++-6
 apt-get install -y libx11-dev
 
+apt-get install -y python3-distutils python3-setuptools python3-pip
+DEBIAN_FRONTEND='noninteractive' apt-get install -y cmake libopenblas-dev liblapack-dev libjpeg-dev
+apt-get install -y git
+git clone https://github.com/davisking/dlib.git
+cd dlib
+mkdir build
+cd build
+cmake .. -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1 -DCUDA_HOST_COMPILER=/usr/bin/gcc-6
+cmake --build .
+cd .. 
 
 ```
 
