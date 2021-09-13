@@ -132,6 +132,12 @@ cmake .. -DDLIB_USE_CUDA=1 -DUSE_AVX_INSTRUCTIONS=1 -DCUDA_HOST_COMPILER=/usr/bi
 cmake --build .
 cd .. 
 
+apt-get install -y python3-opencv
+pip3 install face_recognition
+cd /mnt
+cp -p test.py /tmp
+cp -p train.pkl /tmp
+/tmp/test.py 
 ```
 
 
