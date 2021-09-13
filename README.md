@@ -152,7 +152,19 @@ train.pkl
 $ sudo docker build -t face_recognizer .
 
 $ sudo docker images
-REPOSITORY              TAG                               IMAGE ID       CREATED       SIZE
-nvcr.io/nvidia/driver   470.57.02-ubuntu20.04             15eeb055da6a   5 weeks ago   826MB
-nvidia/cuda             11.4.1-cudnn8-devel-ubuntu20.04   132256fd7024   5 weeks ago   8.83GB
+REPOSITORY              TAG                               IMAGE ID       CREATED          SIZE
+face_recognizer         1.0.0                             5f3503aedca0   35 seconds ago   10.6GB
+nvcr.io/nvidia/driver   470.57.02-ubuntu20.04             15eeb055da6a   5 weeks ago      826MB
+nvidia/cuda             11.4.1-cudnn8-devel-ubuntu20.04   132256fd7024   5 weeks ago      8.83GB
+```
+
+# 8. Run the container on Virtual Machine (After Booting Virtual Machine)
+```
+$ xhost +
+$ sudo docker run -itd --gpus all --name="face" --rm -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY face_recognizer:1.0.0
+```
+Or following. An example below is the over-write of ENTORYPOINT, so you can run any python scripts which are put on /mnt and using dlib and GPU's libraries.
+```
+$ xhost +
+$ sudo docker run -itd --gpus all --name="face" --rm -v work:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/video0:/dev/video0:mwr --entrypoint "/mnt/test.py" -e DISPLAY=$DISPLAY face_recognizer:1.0.0
 ```
