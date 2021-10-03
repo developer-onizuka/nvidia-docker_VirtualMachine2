@@ -11,7 +11,7 @@ Guest-Machine:~$ dpkg -l |grep -i nvidia
 Guest-Machine:~$ (no result)
 ```
 
-# 0. Check Kernel version
+# 0-1. Check Kernel version of Virtual Machine
 5.11 was failed while in the step #3. You might use 5.4 instead of 5.11.
 ```
 $ uname -r
