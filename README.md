@@ -151,7 +151,7 @@ $ ls
 Dockerfile
 test.py
 train.pkl
-$ sudo docker build -t face_recognizer .
+$ sudo docker build -t face_recognizer:1.0.0 .
 
 $ sudo docker images
 REPOSITORY              TAG                               IMAGE ID       CREATED          SIZE
