@@ -55,6 +55,12 @@ $ sudo apt-get install -y nvidia-docker2
 $ sudo systemctl restart docker
 ```
 
+If you find "Unsupported distribution! Check https://nvidia.github.io/nvidia-docker", then you might use below instead of above.
+```
+curl -s -L https://nvidia.github.io/nvidia-docker/ubuntu20.04/nvidia-docker.list | \ 
+sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+```
+
 # 3. Install Containerized Nvidia-driver on Virtual Machine
 ```
 $ sudo sed -i 's/^#root/root/' /etc/nvidia-container-runtime/config.toml
