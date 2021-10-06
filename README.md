@@ -182,24 +182,24 @@ $ sudo docker run -itd --gpus all --name="face" --rm -v work:/mnt -v /tmp/.X11-u
 https://qiita.com/hoto17296/items/7c1ba10c1575c6c38105
 ```
 $ ssh -x vagrant@<IP Address of Virtual Machine>
-vagrant@gpu-node:~$ sudo apt install x11-xserver-utils
-vagrant@gpu-node:~$ sudo apt-get install x11-apps
+vagrant@gpu:~$ sudo apt install x11-xserver-utils
+vagrant@gpu:~$ sudo apt-get install x11-apps
 
-vagrant@gpu-node:~$ cat /etc/ssh/sshd_config |grep X11
+vagrant@gpu:~$ cat /etc/ssh/sshd_config |grep X11
 X11Forwarding yes
 X11DisplayOffset 10
 X11UseLocalhost no 
 
-vagrant@gpu-node:~$ sudo service sshd restart
-vagrant@gpu-node:~$ echo $DISPLAY
-gpu-node:10.0
-vagrant@gpu-node:~$ exit
+vagrant@gpu:~$ sudo service sshd restart
+vagrant@gpu:~$ echo $DISPLAY
+gpu:10.0
+vagrant@gpu:~$ exit
 
 $ ssh -x vagrant@<IP Address of Virtual Machine>
 vagrant@<IP Address of Virtual Machine>'s password: 
 Last login: Wed Oct  6 11:35:58 2021 from 192.168.xxx.xxx
 /usr/bin/xauth:  file /home/vagrant/.Xauthority does not exist
-vagrant@gpu-node:~$ xeyes
+vagrant@gpu:~$ xeyes
 
-vagrant@gpu-node:~$ sudo docker run -itd --net host -v /tmp/test:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/root/.Xauthority --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY --gpus all --rm --name="camera" face_recognizer:1.0.0
+vagrant@gpu:~$ sudo docker run -itd --net host -v /tmp/test:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/root/.Xauthority --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY --gpus all --rm --name="camera" face_recognizer:1.0.0
 ```
