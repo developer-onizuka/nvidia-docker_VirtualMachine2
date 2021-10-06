@@ -176,3 +176,21 @@ Or following. An example below is the over-write of ENTORYPOINT, so you can run 
 $ xhost +
 $ sudo docker run -itd --gpus all --name="face" --rm -v work:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/video0:/dev/video0:mwr --entrypoint "/mnt/test.py" -e DISPLAY=$DISPLAY face_recognizer:1.0.0
 ```
+
+# 9. X11 Forwarding settings in Virtual Machine
+```
+$ ssh -x vagrant@<IP Address of Virtual Machine>
+vagrant@gpu-node:~$ sudo apt install x11-xserver-utils
+vagrant@gpu-node:~$ sudo apt-get install x11-apps
+
+vagrant@gpu-node:~$ cat /etc/ssh/sshd_config |grep X11
+X11Forwarding yes
+X11DisplayOffset 10
+X11UseLocalhost no 
+
+vagrant@gpu-node:~$ sudo service sshd restart
+vagrant@gpu-node:~$ echo $DISPLAY
+gpu-node:10.0
+
+vagrant@gpu-node:~$ sudo docker run -itd --net host -v /tmp/test:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/root/.Xauthority --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY --gpus all --rm --name="camera" face_recognizer:1.0.0
+```
