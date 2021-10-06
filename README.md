@@ -182,7 +182,7 @@ $ sudo docker run -itd --gpus all --name="face" --rm -v work:/mnt -v /tmp/.X11-u
 https://qiita.com/hoto17296/items/7c1ba10c1575c6c38105
 ```
 $ ssh -x vagrant@<IP Address of Virtual Machine>
-vagrant@gpu:~$ sudo apt install x11-xserver-utils
+vagrant@gpu:~$ sudo apt-get install x11-xserver-utils
 vagrant@gpu:~$ sudo apt-get install x11-apps
 
 vagrant@gpu:~$ cat /etc/ssh/sshd_config |grep X11
