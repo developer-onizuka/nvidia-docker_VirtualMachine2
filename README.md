@@ -1,3 +1,7 @@
+You might use the Vagrant. (https://github.com/developer-onizuka/setup-centos8)
+
+Then you might skip #0~#8 below. Go to #9.
+
 # 0. Install Ubuntu 20.04 as Virtual Machine with GPU on KVM. See the URL below.
 https://github.com/developer-onizuka/virtualMachine_withGPU
 
@@ -148,7 +152,7 @@ $ sudo docker exec -it camera /bin/bash
 # /tmp/test.py 
 ```
 
-# 7. Create the face_recognizer by using Dcokerfile on Virtual Machine
+# 7. Create the face_recognizer by using Dockerfile on Virtual Machine
 If you can run the test above, you might use the Dockerfile attached.
 ```
 $ mkdir face_recognizer
