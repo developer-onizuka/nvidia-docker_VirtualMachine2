@@ -194,8 +194,6 @@ vagrant@gpu-node:~$ sudo service sshd restart
 vagrant@gpu-node:~$ echo $DISPLAY
 gpu-node:10.0
 vagrant@gpu-node:~$ exit
-logout
-Connection to 192.168.33.111 closed.
 
 $ ssh -x vagrant@<IP Address of Virtual Machine>
 vagrant@<IP Address of Virtual Machine>'s password: 
