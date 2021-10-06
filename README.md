@@ -193,6 +193,15 @@ X11UseLocalhost no
 vagrant@gpu-node:~$ sudo service sshd restart
 vagrant@gpu-node:~$ echo $DISPLAY
 gpu-node:10.0
+vagrant@gpu-node:~$ exit
+logout
+Connection to 192.168.33.111 closed.
+
+$ ssh -x vagrant@<IP Address of Virtual Machine>
+vagrant@<IP Address of Virtual Machine>'s password: 
+Last login: Wed Oct  6 11:35:58 2021 from 192.168.xxx.xxx
+/usr/bin/xauth:  file /home/vagrant/.Xauthority does not exist
+vagrant@gpu-node:~$ xeyes
 
 vagrant@gpu-node:~$ sudo docker run -itd --net host -v /tmp/test:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/root/.Xauthority --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY --gpus all --rm --name="camera" face_recognizer:1.0.0
 ```
