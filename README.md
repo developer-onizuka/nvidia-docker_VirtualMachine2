@@ -182,7 +182,6 @@ $ sudo docker run -itd --gpus all --name="face" --rm -v work:/mnt -v /tmp/.X11-u
 ```
 
 # 9. X11 Forwarding settings in Virtual Machine
-
 https://qiita.com/hoto17296/items/7c1ba10c1575c6c38105
 ```
 $ ssh -X vagrant@<IP Address of Virtual Machine>
@@ -208,4 +207,39 @@ Last login: Wed Oct  6 11:35:58 2021 from 192.168.xxx.xxx
 vagrant@gpu:~$ xeyes
 
 vagrant@gpu:~$ sudo docker run -itd --net host -v /tmp/test:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/root/.Xauthority --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY --gpus all --rm --name="camera" face_recognizer:1.0.0
+```
+
+# 10. SSH forwarding
+If you want to emulate Docker CLI using podman, you may install podman-docker below:
+```
+$ sudo dnf install podman-docker
+```
+```
+$ cat <<EOF > haproxy.cfg 
+global
+       daemon
+       maxconn 10000
+
+defaults
+       timeout connect 500s
+       timeout client 5000s
+       timeout server 1h
+
+frontend sshd
+       bind *:2022
+       mode tcp
+       default_backend app
+       timeout client 1h
+
+backend app
+       mode tcp
+       server app1 <IP Address of Virtual Machine>:22 check
+EOF
+
+$ sudo podman run -it --rm --name haproxy -p 2022:2022 --net host -v $(pwd)/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:Z docker.io/library/haproxy:latest
+```
+
+Try ssh to <IP Address of Virtual Machine> from other machines such as windows machine. You will find Xwindows on your windows machine.
+```
+$ ssh -X -p 2022 <IP Address of Virtual Machine>  
 ```
