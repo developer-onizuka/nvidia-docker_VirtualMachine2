@@ -185,11 +185,12 @@ $ sudo docker run -itd --gpus all --name="face" --rm -v work:/mnt -v /tmp/.X11-u
 
 https://qiita.com/hoto17296/items/7c1ba10c1575c6c38105
 ```
-$ ssh -x vagrant@<IP Address of Virtual Machine>
+$ ssh -X vagrant@<IP Address of Virtual Machine>
 vagrant@gpu:~$ sudo apt-get install -y x11-xserver-utils
 vagrant@gpu:~$ sudo apt-get install -y x11-apps
 
-vagrant@gpu:~$ sudo cat <<EOF >> /etc/ssh/sshd_config
+vagrant@gpu:~$ sudo su
+root@gpu:/home/vagrant# cat <<EOF >> /etc/ssh/sshd_config
 X11Forwarding yes
 X11DisplayOffset 10
 X11UseLocalhost no
@@ -200,7 +201,7 @@ vagrant@gpu:~$ echo $DISPLAY
 gpu:10.0
 vagrant@gpu:~$ exit
 
-$ ssh -x vagrant@<IP Address of Virtual Machine>
+$ ssh -X vagrant@<IP Address of Virtual Machine>
 vagrant@<IP Address of Virtual Machine>'s password: 
 Last login: Wed Oct  6 11:35:58 2021 from 192.168.xxx.xxx
 /usr/bin/xauth:  file /home/vagrant/.Xauthority does not exist
