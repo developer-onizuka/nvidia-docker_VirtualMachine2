@@ -189,10 +189,11 @@ $ ssh -x vagrant@<IP Address of Virtual Machine>
 vagrant@gpu:~$ sudo apt-get install -y x11-xserver-utils
 vagrant@gpu:~$ sudo apt-get install -y x11-apps
 
-vagrant@gpu:~$ cat /etc/ssh/sshd_config |grep X11
+vagrant@gpu:~$ sudo cat <<EOF >> /etc/ssh/sshd_config
 X11Forwarding yes
 X11DisplayOffset 10
-X11UseLocalhost no 
+X11UseLocalhost no
+EOF
 
 vagrant@gpu:~$ sudo service sshd restart
 vagrant@gpu:~$ echo $DISPLAY
