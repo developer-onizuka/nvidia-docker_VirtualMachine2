@@ -210,9 +210,11 @@ vagrant@gpu:~$ sudo docker run -itd --net host -v /tmp/test:/mnt -v /tmp/.X11-un
 ```
 
 # 10. SSH forwarding
-If you want to emulate Docker CLI using podman, you may install podman-docker below:
+If you are using CentOS, then you might use docker instead of podman: 
+Podman is not good at using HAproxy container. I hate Podman...
 ```
-$ sudo dnf install podman-docker
+$ sudo yum -y remove podman
+$ sudo dnf install -y docker-ce docker-ce-cli containerd.io --allowerasing
 ```
 ```
 $ cat <<EOF > haproxy.cfg 
@@ -236,10 +238,13 @@ backend app
        server app1 <IP Address of Virtual Machine>:22 check
 EOF
 
-$ sudo podman run -it --rm --name haproxy -p 2022:2022 --net host -v $(pwd)/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:Z docker.io/library/haproxy:latest
+$ sudo docker run -it --rm --name haproxy -p 2022:2022 -v $(pwd)/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro docker.io/library/haproxy:latest
 ```
 
-Try ssh to <IP Address of Virtual Machine> from other machines such as windows machine. You will find Xwindows on your windows machine.
+Try ssh to <IP Address of Virtual Machine> from desktop machines such as Macintosh. You will find Xwindows on your Macintosh which is installed XQuartz. 
+https://www.xquartz.org/
 ```
-$ ssh -X -p 2022 <IP Address of Virtual Machine>  
+bash-3.2$ ssh -Y -p 2022 <IP Address of Virtual Machine>  
+$ xeyes &
+$ sudo docker run -itd --net host -v /tmp/test:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/root/.Xauthority --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY --gpus all --rm --name="camera" face_recognizer:1.0.0
 ```
