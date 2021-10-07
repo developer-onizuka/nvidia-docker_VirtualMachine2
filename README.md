@@ -210,8 +210,8 @@ vagrant@gpu:~$ sudo docker run -itd --net host -v /tmp/test:/mnt -v /tmp/.X11-un
 ```
 
 # 10. SSH forwarding
-If you are using CentOS, then you might use docker instead of podman: 
-Podman is not good at using HAproxy container. I hate Podman...
+If you are using CentOS, then you might find podman instead of docker. But Podman is not good at using HAproxy container. I hate Podman... 
+I always remove it soon.
 ```
 $ sudo yum -y remove podman
 $ sudo dnf install -y docker-ce docker-ce-cli containerd.io --allowerasing
