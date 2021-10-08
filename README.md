@@ -209,7 +209,7 @@ vagrant@gpu:~$ xeyes
 vagrant@gpu:~$ sudo docker run -itd --net host -v /tmp/test:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/root/.Xauthority --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY --gpus all --rm --name="camera" face_recognizer:1.0.0
 ```
 
-# 10. SSH forwarding
+# 10. SSH forwarding from Client to Virtual Machine via Host Machine
 If you are using CentOS, then you might find podman instead of docker. But Podman is not good at using HAproxy container. I hate Podman... 
 I always remove it soon.
 ```
