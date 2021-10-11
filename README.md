@@ -246,5 +246,9 @@ https://www.xquartz.org/
 ```
 bash-3.2$ ssh -Y -p 2022 <IP Address of Virtual Machine>  
 $ xeyes &
+```  
+```
+$ sudo docker run --name nvidia-driver -itd --rm --privileged --pid=host -v /run/nvidia:/run/nvidia:shared -v /var/log:/var/log  nvcr.io/nvidia/driver:470.57.02-ubuntu20.04
+$ sudo docker logs -f nvidia-driver
 $ sudo docker run -itd --net host -v /tmp/test:/mnt -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/root/.Xauthority --device /dev/video0:/dev/video0:mwr -e DISPLAY=$DISPLAY --gpus all --rm --name="camera" face_recognizer:1.0.0
 ```
